@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sharjah Tourism Innovation Hackathon 2025</title>
+
+    <!-- Modern, geometric font for futuristic yet readable UI -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --brand-purple: #7775b4; /* Pantone 7446C */
+        --brand-green: #a6c0ad; /* Pantone 558C */
+        --brand-black: #000;
+        --brand-white: #fff;
+        --gradient: linear-gradient(
+          135deg,
+          var(--brand-purple),
+          var(--brand-green)
+        );
+        --radius: 18px;
+        --shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        --text: #edeef4;
+        --muted: #bbbcc6;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: #0f1014;
+        color: var(--text);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* =========== HERO =========== */
+      header {
+        position: relative;
+        min-height: 72vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        overflow: hidden;
+        padding: 60px 20px 40px;
+      }
+      header::before {
+        content: "";
+        position: absolute;
+        inset: -20%;
+        background: radial-gradient(
+            40% 50% at 15% 20%,
+            rgba(166, 192, 173, 0.28),
+            transparent 60%
+          ),
+          radial-gradient(
+            45% 55% at 80% 25%,
+            rgba(119, 117, 180, 0.35),
+            transparent 60%
+          ),
+          radial-gradient(
+            60% 70% at 50% 90%,
+            rgba(166, 192, 173, 0.25),
+            transparent 60%
+          );
+        animation: float 16s ease-in-out infinite alternate;
+        filter: blur(10px) saturate(120%);
+        z-index: -2;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(-2%);
+        }
+        100% {
+          transform: translateY(3%);
+        }
+      }
+      .grid-lines {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.12;
+        background-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.08) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.08) 1px,
+            transparent 1px
+          );
+        background-size: 48px 48px;
+        animation: grid 20s linear infinite;
+      }
+      @keyframes grid {
+        to {
+          background-position: 48px 48px, 48px 48px;
+        }
+      }
+
+      .brandbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .brandbar img {
+        height: 60px;
+        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+      }
+      h1 {
+        font-weight: 800;
+        font-size: clamp(2rem, 4vw, 3.1rem);
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 28px rgba(166, 192, 173, 0.3);
+        margin-bottom: 10px;
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        to {
+          text-shadow: 0 0 36px rgba(119, 117, 180, 0.6);
+        }
+      }
+      .lead {
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+      }
+      .chip {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        padding: 8px 16px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        backdrop-filter: blur(8px);
+      }
+
+      /* =========== HIGHLIGHT BAR =========== */
+      .highlight-bar {
+        width: 100%;
+        background: var(--gradient);
+        color: #fff;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        text-align: center;
+        padding: 16px 10px;
+        font-size: 1.2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .highlight-bar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        transform: translateX(-100%);
+        /* animation: shine 10s ease-in-out infinite; */
+        mix-blend-mode: screen;
+      }
+      @keyframes shine {
+        to {
+          transform: translateX(100%);
+        }
+      }
+
+      /* =========== MAIN =========== */
+      main {
+        max-width: 1140px;
+        margin: 40px auto 60px;
+        padding: 0 20px;
+        display: grid;
+        gap: 40px;
+      }
+      .card {
+        background: #171923;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 6px solid var(--brand-purple);
+        border-radius: var(--radius);
+        padding: 34px 28px;
+        box-shadow: var(--shadow);
+        transition: 0.25s ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--brand-green);
+      }
+      h2.section {
+        color: var(--brand-green);
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+      }
+      p,
+      li {
+        color: #dadbe2;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin: 6px 0;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 40px;
+      }
+      @media (max-width: 980px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 14px 26px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.25s ease;
+      }
+      .btn-primary {
+        background: var(--gradient);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(119, 117, 180, 0.35);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 44px rgba(166, 192, 173, 0.5);
+      }
+      .btn-ghost {
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        background: transparent;
+      }
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      /* Countdown */
+      .countdown {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .cd-unit {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 10px 16px;
+        text-align: center;
+        color: #fff;
+        backdrop-filter: blur(6px);
+      }
+      .cd-label {
+        font-size: 0.8rem;
+        opacity: 0.8;
+      }
+      .cd-value {
+        font-size: 1.6rem;
+        font-weight: 800;
+      }
+
+      /* Table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      th {
+        color: #b5bad0;
+        font-weight: 700;
+      }
+
+      /* Awards */
+      .awards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: center;
+      }
+      .award {
+        flex: 1;
+        min-width: 200px;
+        background: var(--gradient);
+        color: #0f1117;
+        text-align: center;
+        font-weight: 800;
+        padding: 22px;
+        border-radius: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+      .award::after {
+        content: "";
+        position: absolute;
+        inset: -120% -40%;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.5) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(20deg);
+        animation: shimmer 3.5s linear infinite;
+        mix-blend-mode: screen;
+      }
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-60%) rotate(20deg);
+        }
+        100% {
+          transform: translateX(60%) rotate(20deg);
+        }
+      }
+
+      footer {
+        text-align: center;
+        color: #a5a7b8;
+        padding: 40px 20px 60px;
+      }
+      footer a {
+        color: #dde3ff;
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(221, 227, 255, 0.4);
+      }
+      footer a:hover {
+        opacity: 0.8;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card ul li {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .card ul li:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card ul li:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card ul li:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .card ul li:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .card ul li:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .hero-banner {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin-bottom: 40px;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(166, 192, 173, 0.08) 0%,
+          rgba(119, 117, 180, 0.08) 100%
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      }
+
+      .hero-banner img {
+        width: 90%;
+        max-width: 1100px;
+        height: auto;
+        border-radius: 8px;
+        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.35));
+        transition: transform 0.4s ease;
+      }
+
+      .hero-banner img:hover {
+        transform: scale(1.02);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="grid-lines"></div>
+      <div class="hero-banner">
+        <img src="banner_v2.png" alt="Sharjah Tourism Hackathon Banner" />
+      </div>
+
+      <h1>Sharjah Tourism Innovation Hackathon 2025</h1>
+      <p class="lead">
+        1–2 November 2025 <br />
+        Main Building - American University of Sharjah, Sharjah, UAE
+      </p>
+      <span class="chip"
+        >In collaboration with Sharjah International Travel and Tourism
+        Forum</span
+      >
+      <div class="countdown" id="countdown"></div>
+    </header>
+
+    <div class="highlight-bar">
+      AED 45,000 IN PRIZES!! <br />
+      WINNING TEAM PRESENTS AT THE SHARJAH INTERNATIONAL TRAVEL AND TOURISM
+      FORUM 2025!
+    </div>
+
+    <main>
+      <section class="grid-2">
+        <article class="card">
+          <h2 class="section">About the Hackathon</h2>
+          <p>
+            Get ready for a two-day innovation sprint where imagination meets
+            impact!<br />
+            Hosted by AUS in collaboration with the Sharjah Commerce & Tourism
+            Development Authority (SCTDA), this hackathon brings together the
+            UAE’s boldest thinkers to redefine the future of sustainable
+            tourism. Over the course of the event, teams will
+            <strong>develop their solutions from concept to prototype</strong>
+            with guidance from
+            <strong>industry mentors and experts</strong>.<br />
+            It’s not just a competition - it’s a launchpad for ideas that move
+            the world.
+          </p>
+          <ul>
+            <li>
+              <strong>Empower Emerging Talent:</strong> Build and refine working
+              prototypes with expert mentorship throughout the hackathon.
+            </li>
+            <li>
+              <strong>Innovation with Purpose:</strong> Align innovation with
+              the UAE’s goals for smarter, more sustainable tourism and
+              development.
+            </li>
+            <li>
+              <strong>Recognition & Exposure:</strong> Pitch your final solution
+              on the Sharjah International Forum 2025 stage to leaders,
+              investors, and innovators.
+            </li>
+          </ul>
+        </article>
+
+        <aside
+          class="card"
+          style="
+            text-align: center;
+            background: linear-gradient(
+              160deg,
+              rgba(119, 117, 180, 0.18),
+              rgba(166, 192, 173, 0.08)
+            );
+          "
+        >
+          <h2 class="section" style="color: #fff">Join the Challenge</h2>
+          <p style="color: #eaf5f0">
+            Pre-registration is required. Selected participants will receive
+            confirmation by email.
+          </p>
+          <div style="margin-top: 16px">
+            <a href="#" class="btn btn-primary">Register Now</a>
+            <a href="#details" class="btn btn-ghost">Learn More</a>
+          </div>
+          <p style="margin-top: 20px; color: #fff; font-weight: 700">
+            Total Prize Pool: AED 45,000
+          </p>
+          <p style="color: #cfe9dc">
+            Winning team presents at the Sharjah International Forum 2025!
+          </p>
+        </aside>
+      </section>
+
+      <section id="details" class="card">
+        <h2 class="section">Event Details</h2>
+        <table>
+          <tr>
+            <th>Dates</th>
+            <td>1–2 November 2025</td>
+          </tr>
+          <tr>
+            <th>Host</th>
+            <td>
+              American University of Sharjah (Department of Computer Science &
+              Engineering)
+            </td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>Main Building, AUS Campus, Sharjah</td>
+          </tr>
+          <tr>
+            <th>Eligibility</th>
+            <td>Undergraduate students from universities across the UAE</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="section">Expected Submissions from Participants</h2>
+        <p>
+          Shortlisted teams must deliver a
+          <strong>5-minute presentation</strong> of their solution or idea,
+          presented in one or more of the following formats:
+        </p>
+        <ul>
+          <li>
+            <strong>Concept Pitch:</strong> A well-structured idea supported by
+            visuals, research insights, and an implementation roadmap (e.g.,
+            wireframes, mockups, or user journey flows).
+          </li>
+          <li>
+            <strong>Working MVP / Prototype:</strong> A live demo or proof of
+            concept demonstrating technical feasibility — even with minimal
+            functionality, practical execution earns higher recognition.
+          </li>
+          <li>
+            <strong>Data Visualizations:</strong> Use of charts, graphs, or
+            infographics to illustrate the challenge, insights, and potential
+            outcomes.
+          </li>
+          <li>
+            <strong>Short Video Pitch:</strong> A brief 1–3 minute video
+            summarizing the idea, its value, and real-world impact.
+          </li>
+          <li>
+            <strong>UX/UI Prototypes:</strong> Interactive visuals or design
+            mockups showcasing user experience, interface flow, and
+            functionality.
+          </li>
+        </ul>
+        <p style="margin-top: 10px">
+          All submissions should present
+          <strong>integrated, practical, and high-impact solutions</strong> that
+          align with the UAE’s vision for a smart and sustainable future.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 class="section">Evaluation Criteria</h2>
+        <table>
+          <tr>
+            <th>Criterion</th>
+            <th>Weight</th>
+          </tr>
+          <tr>
+            <td>Problem Definition</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>Relevance to Theme</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>Feasibility</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>Impact & Value</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>Sharjah / UAE Context</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>Use of Emerging Tech</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>Creativity & Presentation</td>
+            <td>10%</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="section">Prizes & Recognition</h2>
+        <div class="awards">
+          <div class="award">
+            🥇 AED 20,000 <br /><small>First Place</small>
+          </div>
+          <div class="award">
+            🥈 AED 15,000 <br /><small>Second Place</small>
+          </div>
+          <div class="award">
+            🥉 AED 10,000 <br /><small>Third Place</small>
+          </div>
+        </div>
+        <p
+          style="
+            text-align: center;
+            margin-top: 18px;
+            font-weight: 700;
+            color: #cfe9dc;
+          "
+        >
+          The winning team will present their solution at the Sharjah
+          International Travel and Tourism Forum 2025!
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Sharjah Tourism Innovation Hackathon 2025 • 1–2 November 2025 • American
+        University of Sharjah
+      </p>
+      <p>Contact: <a href="mailto:asajun@aus.edu">asajun@aus.edu</a></p>
+    </footer>
+
+    <script>
+      // Simple dynamic countdown
+      const target = new Date("Nov 1 2025 09:00:00 GMT+0400").getTime();
+      const el = document.getElementById("countdown");
+      function update() {
+        const diff = Math.max(0, target - Date.now());
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor(diff / 3600000) % 24;
+        const m = Math.floor(diff / 60000) % 60;
+        const s = Math.floor(diff / 1000) % 60;
+        el.innerHTML = `<div class="cd-unit"><div class="cd-label">Days</div><div class="cd-value">${d}</div></div>
+        <div class="cd-unit"><div class="cd-label">Hours</div><div class="cd-value">${h}</div></div>
+        <div class="cd-unit"><div class="cd-label">Minutes</div><div class="cd-value">${m}</div></div>
+        <div class="cd-unit"><div class="cd-label">Seconds</div><div class="cd-value">${s}</div></div>`;
+      }
+      update();
+      setInterval(update, 1000);
+    </script>
+  </body>
+</html>
